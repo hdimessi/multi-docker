@@ -3,20 +3,20 @@ services:
     - docker
 
 before_install:
-    - docker build -t hdimessi/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t hdimes/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true hdimessi/react-test npm run test
+    - docker run -e CI=true hdimes/react-test npm run test
 
 after_success:
-    - docker build -t hdimessi/multi-client ./client
-    - docker build -t hdimessi/multi-nginx ./nginx
-    - docker build -t hdimessi/multi-server ./server
-    - docker build -t hdimessi/multi-worker ./worker
+    - docker build -t hdimes/multi-client ./client
+    - docker build -t hdimes/multi-nginx ./nginx
+    - docker build -t hdimes/multi-server ./server
+    - docker build -t hdimes/multi-worker ./worker
     # Login to the docker CLI
     - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images to docker hub
-    - docker push hdimessi/multi-client 
-    - docker push hdimessi/multi-nginx
-    - docker push hdimessi/multi-server 
-    - docker push hdimessi/multi-worker 
+    - docker push hdimes/multi-client 
+    - docker push hdimes/multi-nginx
+    - docker push hdimes/multi-server 
+    - docker push hdimes/multi-worker 
